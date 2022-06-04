@@ -1,8 +1,15 @@
-# This is a sample Python script.
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+with DAG("my_dag",start_date=datetime(2021, 1, 1),
+         schedule_interval="@daily", catchup=False) as dag:
 
+training_model_A = PythonOperator(
+    task_id="training_model_A"
+    python_callable=print_hi("Diego")
+
+)
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
